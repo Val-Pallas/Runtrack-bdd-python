@@ -4,3 +4,6 @@
 mysqldump -u root -p laplateforme > laplateforme_backup.sql
 
 
+cd /path/to/directory/with/backup/file
+ls
+cat laplateforme_backup.sql
