@@ -1,8 +1,6 @@
 CREATE DATABASE La Plateforme;
-
-show databases;
+SHOW databases;
 USE LaPlateforme;
-
 CREATE TABLE  etudiants(
     id (int),
     nom (varchar 255),
@@ -10,7 +8,3 @@ CREATE TABLE  etudiants(
     age (int),
     email (varchar 255),
 );
-
-DESCRIBE etudiants;
-
-SHOW COLUMNS FROM etudiants;
