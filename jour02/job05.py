@@ -15,7 +15,8 @@ print(db)
 
 cursor = db.cursor()
 
-cursor.execute("SELECT SUM(superficie) FROM etage;")
-resultats = cursor.fetchall()
+cursor.execute("SELECT SUM(superficie) FROM etage")
+resultats = cursor.fetchone()
+superficie_totale = resultats[0]
 for resultat in resultats:
-    print(resultat)
+    print("La superficie de La Plateforme est de:", resultat,"m2")
