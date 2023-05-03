@@ -82,43 +82,38 @@ result = mycursor.fetchall()
 for row in result:
     print(row)
 
-import mysql.connector
-
-class Salarie:
-    
+class Employe:
     def __init__(self):
         self.db = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="password",
-            database="ma_base_de_donnees"
+            password="velvet",
+            database="usine"
         )
         
         self.mycursor = self.db.cursor()
-        
-    def create(self, nom, prenom, salaire):
+    
+    def create(self, nom, prenom,salaire):
         sql = "INSERT INTO salarie (nom, prenom, salaire) VALUES (%s, %s, %s)"
-        val = (nom, prenom, salaire)
-        self.mycursor.execute(sql, val)
+        val = (nom, prenom, salaire),
+        self.mycursor.execute(sql, val),
         self.db.commit()
         print(self.mycursor.rowcount, "enregistrement inséré.")
-        
-    def read(self):
-        self.mycursor.execute("SELECT * FROM salarie")
+    def read (self):
+        self.mycursor.execute("SELECT * FROM employe")
         result = self.mycursor.fetchall()
         for row in result:
             print(row)
-            
     def update(self, id, nom, prenom, salaire):
-        sql = "UPDATE salarie SET nom = %s, prenom = %s, salaire = %s WHERE id = %s"
+        sql = "UPDATE emlpoye SET nom = %s, prenom =%s, salaire = %s WHERE id = %s"
         val = (nom, prenom, salaire, id)
         self.mycursor.execute(sql, val)
         self.db.commit()
-        print(self.mycursor.rowcount, "enregistrement(s) mis à jour.")
-        
+        print(self.mycursor.rowcount, "enregistrement(s) mis a jour.")
+    
     def delete(self, id):
-        sql = "DELETE FROM salarie WHERE id = %s"
-        val = (id,)
+        sql = "DELETE FROM employe WHERE id = %s"
+        val = (id)
         self.mycursor.execute(sql, val)
         self.db.commit()
         print(self.mycursor.rowcount, "enregistrement(s) supprimé(s).")
