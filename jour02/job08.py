@@ -59,18 +59,53 @@ class Animal:
         print(self.mycursor.rowcount, "enregistrement(s) supprimé(s).")
 
 class Cage:
-    def __init__(self, id, sup, capacite):
-        self.id = id
-        self.sup = sup
-        self.capacite = capacite
-        print()        
-db = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      password="velvet",
-      database="zoo"
-)
-cursor = db.cursor()
-cursor.execute("SELECT SUM(sup) FROM cage")
-result = cursor.fetchone()
-print("superficie totale des cages:", result[0])
+    def __init__(self):
+        db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="velvet",
+        database="zoo"
+        )
+        self.mycursor = self.db.cursor()
+        mycursor = db.cursor()
+        mycursor.execute("SELECT SUM(sup) FROM cage")
+        result = mycursor.fetchone()
+        print("superficie totale des cages:", result[0])
+        
+    def create(self, sup, capacite):
+        sql = "INSERT INTO cage (sup, capacite) VALUES (%s, %s)"
+        val= (sup, capacite)
+        self.mycursor.execute(sql, val)
+        self.db.commit()
+        print(self.mycursor.rowcount, "enregistrement inséré.")
+        
+    def read(self):
+        self.mycursor.execute("SELECT * FROM Zoo")
+        result = self.mycursor.fetchall()
+        for row in result:
+            print(row)
+    
+    def update(self, id, sup, capacite):
+        sql = "UPDATE cage SET sup = %s, capacite=%s WHERE id = %s"
+        val = []
+        if sup is not None:
+            sql += "sup = %s,"
+            val.append(sup)
+        if capacite is not None:
+            sql += "capacite = %s,"
+            val.append(capacite)
+        sql = sql[:-2] + " WHERE id = %s"
+        val.append(id)
+        self
+    
+    def delete(self, id):
+        sql = "DELETE FROM cage WHERE id = %s"
+        val = (id,)
+        self.mycursor.execute(sql, val)
+        self.db.commit()
+        print(self.mycursor.rowcount, "enregistrement(s) supprimé")
+
+
+
+
+
