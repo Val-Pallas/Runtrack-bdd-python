@@ -2,7 +2,7 @@
 - id, int, primary key, auto-incrémente
 - nom, varchar
 - prenom, varchar
-- salaire, decimal
+- salaire, float
 - id_service, int
       
  Écrire une requête SQL pour récupérer tout les employées dont le salaire est supérieur à 3 000 €. Exécuter la requête et afficher le résultat.
